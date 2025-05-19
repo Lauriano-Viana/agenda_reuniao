@@ -13,7 +13,7 @@
       border-radius: 8px;
     }
 
-    h2 {
+    h2, h3 {
       text-align: center;
       color: #333;
     }
@@ -56,6 +56,10 @@
       width: 100%;
       border-collapse: collapse;
       margin-top: 10px;
+      background: #fff;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 0 6px rgba(0,0,0,0.1);
     }
 
     th, td {
@@ -110,7 +114,7 @@
     const resultado = document.getElementById('resultado');
     const tabela = document.querySelector('#tabela-agendamentos tbody');
 
-    const URL = "https://script.google.com/macros/s/AKfycbwaQRLa_UgCxJxDrPdU970mcfmsI5bKNu5zQUqvmjI9186O-UiokpLx2T2uMTj4BDFtDw/exec"; // Substitua pela URL do seu Apps Script
+    const URL = "https://script.google.com/macros/s/AKfycbwaQRLa_UgCxJxDrPdU970mcfmsI5bKNu5zQUqvmjI9186O-UiokpLx2T2uMTj4BDFtDw/exec"; // 👈 Substitua aqui!
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -127,7 +131,7 @@
 
       if (r.status === "sucesso") {
         form.reset();
-        buscarAgendamentos(); // Atualiza a tabela após novo agendamento
+        buscarAgendamentos(); // Atualiza a tabela
       }
     });
 
@@ -149,7 +153,6 @@
       });
     }
 
-    // Chama ao carregar a página
     buscarAgendamentos();
   </script>
 </body>
