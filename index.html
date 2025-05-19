@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Agendamento de Sala</title>
+</head>
+<body>
+  <h2>Agendar Sala de Reunião</h2>
+  <form id="form">
+    <label>Nome:<br><input type="text" name="nome" required></label><br><br>
+    <label>Sala:<br><input type="text" name="sala" required></label><br><br>
+    <label>Data:<br><input type="date" name="data" required></label><br><br>
+    <label>Hora:<br><input type="time" name="hora" required></label><br><br>
+    <label>Duração (minutos):<br><input type="number" name="duracao" required></label><br><br>
+    <button type="submit">Agendar</button>
+  </form>
+  <p id="resultado"></p>
+
+  <script>
+    const form = document.getElementById('form');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const dados = Object.fromEntries(new FormData(form));
+      const resposta = await fetch("https://script.google.com/macros/s/AKfycbwaQRLa_UgCxJxDrPdU970mcfmsI5bKNu5zQUqvmjI9186O-UiokpLx2T2uMTj4BDFtDw/exec", {
+        method: "POST",
+        body: JSON.stringify(dados)
+      });
+      const resultado = await resposta.json();
+      document.getElementById('resultado').innerText = resultado.mensagem;
+    });
+  </script>
+</body>
+</html>
