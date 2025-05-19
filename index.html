@@ -135,23 +135,28 @@
       }
     });
 
-    async function buscarAgendamentos() {
-      const resposta = await fetch(URL + "?listar=1");
-      const dados = await resposta.json();
-      tabela.innerHTML = "";
-      dados.forEach((item) => {
-        const linha = document.createElement("tr");
-        linha.innerHTML = `
-          <td>${item.nome}</td>
-          <td>${item.sala}</td>
-          <td>${item.data}</td>
-          <td>${item.inicio}</td>
-          <td>${item.duracao} min</td>
-          <td>${item.fim}</td>
-        `;
-        tabela.appendChild(linha);
-      });
-    }
+    function buscarAgendamentos() {
+  const script = document.createElement('script');
+  script.src = URL + "?listar=1&callback=mostrarAgendamentos";
+  document.body.appendChild(script);
+}
+
+function mostrarAgendamentos(dados) {
+  tabela.innerHTML = "";
+  dados.forEach((item) => {
+    const linha = document.createElement("tr");
+    linha.innerHTML = `
+      <td>${item.nome}</td>
+      <td>${item.sala}</td>
+      <td>${item.data}</td>
+      <td>${item.inicio}</td>
+      <td>${item.duracao} min</td>
+      <td>${item.fim}</td>
+    `;
+    tabela.appendChild(linha);
+  });
+}
+
 
     buscarAgendamentos();
   </script>
